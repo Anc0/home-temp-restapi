@@ -8,3 +8,6 @@ class MqttSubscribe:
     @staticmethod
     def run():
         subscribe_to_mqtt.delay()
+
+
+MqttSubscribe().run()
