@@ -129,3 +129,9 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 # Always use IPython for shell_plus
 SHELL_PLUS = "ipython"
+
+
+try:
+    from local_settings import *
+except:
+    pass

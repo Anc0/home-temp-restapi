@@ -13,7 +13,7 @@ def production_api():
     env.local_dir = '/home/andraz/Projects/home-temp-restapi/'
 
     env.supervisor = 'home-temp-restapi/source/conf/supervisor.home-temp-restapi.production.conf'
-    env.supervisor_file = 'home-temp-restapi'
+    env.supervisor_name = 'home-temp-restapi'
 
     env.nginx = 'home-temp-restapi/source/conf/nginx.home-temp-restapi.production.conf'
     env.nginx_file = 'nginx.home-temp-restapi.production.conf'
