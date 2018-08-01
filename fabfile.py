@@ -66,9 +66,3 @@ def deploy(requirements=False, supervisor=False, nginx=False):
         sudo('ln -s /etc/nginx/sites-available/{} /etc/nginx/sites-enabled/'.format(env.nginx_file))
         sudo('nginx -s reload')
         sudo('nginx -t')
-
-    # Subscribe to temperature topics if deploying mqtt worker
-    if env.start_mqtt:
-        with prefix('source /home/pi/.virtualenvs/home-temp-mqtt-worker/bin/activate'):
-            with prefix('cd /home/pi/home-temp-mqtt-worker/source/'):
-                run('python /home/pi/home-temp-mqtt-worker/source/scripts/start_mqtt_listener.py')
