@@ -1,6 +1,10 @@
+import logging
+
 import paho.mqtt.client as mqtt
 
 from api.models import Topic, TopicRecord
+
+logger = logging.getLogger('mqtt-client')
 
 
 class MqttClient:
@@ -16,24 +20,24 @@ class MqttClient:
 
     @staticmethod
     def on_connect(mqttc, obj, flags, rc):
-        print("rc: " + str(rc))
+        logger.info("rc: " + str(rc))
 
     @staticmethod
     def on_message(mqttc, obj, msg):
-        print("Message received")
+        logger.info("Message received")
         topic, topic_created = Topic.objects.get_or_create(name=str(msg._topic).split("'")[1])
-        print(topic)
+        logger.info(topic)
         topic_record = TopicRecord(value=float(str(msg.payload).split("'")[1]), topic=topic)
         topic_record.save()
         topic.set_last_record(topic_record)
 
     @staticmethod
     def on_subscribe(mqttc, obj, mid, granted_qos):
-        print("Subscribed: " + str(mid) + " " + str(granted_qos))
+        logger.info("Subscribed: " + str(mid) + " " + str(granted_qos))
 
     @staticmethod
     def on_log(mqttc, obj, level, string):
-        print(string)
+        logger.info(string)
 
     def run(self):
         # If you want to use a specific client id, use

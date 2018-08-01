@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from mqtt.tasks import subscribe_to_mqtt
+
+from mqtt.helpers import MqttClient
 
 
 class Command(BaseCommand):
@@ -9,4 +10,4 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        subscribe_to_mqtt()
+        MqttClient().run()
