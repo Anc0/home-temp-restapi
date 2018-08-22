@@ -15,7 +15,7 @@ class TopicRetriever:
         Retrieve all topics (feasible for home use, where there is not a lot of topics).
         :return: list of all topics
         """
-        return Topic.objects.all()
+        return Topic.objects.filter(display=True)
 
     def get_topics(self, topic_names):
         """
