@@ -5,7 +5,6 @@ production_pi = '192.168.1.14'
 
 env.user = 'pi'
 env.hosts = [production_pi]
-env.start_mqtt = False
 
 @task
 def production_api():
@@ -34,8 +33,6 @@ def production_mqtt_worker():
 
     env.virtual_env = '/home/pi/.virtualenvs/home-temp-mqtt-worker/bin/activate'
     env.requirements = '/home/pi/home-temp-mqtt-worker/source/requirements.txt'
-
-    env.start_mqtt = True
 
 @task
 def deploy(requirements=False, supervisor=False, nginx=False):
