@@ -1,7 +1,7 @@
 import json
 
 from django.core.serializers import serialize
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 
 from api.helpers import TopicRetriever, TopicRecordRetriever
 
@@ -18,6 +18,7 @@ def topics(request):
 def topic(request, topic_id):
     data = serialize('json', TopicRetriever().get_topic(id=topic_id))
     return HttpResponse(data, content_type='application/json')
+
 
 def records_for_topic(request, topic_id):
     data = serialize('json', TopicRecordRetriever().get_records_for_topic(topic_id=topic_id))

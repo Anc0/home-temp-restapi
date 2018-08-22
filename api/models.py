@@ -6,6 +6,9 @@ class Topic(models.Model):
 
     last_record = models.OneToOneField('api.TopicRecord', null=True, on_delete=models.SET_NULL, related_name='last_record')
 
+    # Should the topic be displayed in the webapp
+    display = models.BooleanField(default=False)
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 

@@ -57,11 +57,11 @@ class TopicRecordRetriever:
         return TopicRecord.objects.filter(topic=self.topics.get_topic(id=topic_id)[0], created__gte=from_time,
                                           created__lte=to_time)
 
-    def get_records_for_topics(self, topic_names=[], from_time=datetime.now(pytz.UTC) - timedelta(hours=1),
+    def get_records_for_topics(self, topic_names=None, from_time=datetime.now(pytz.UTC) - timedelta(hours=1),
                               to_time=datetime.now(pytz.UTC)):
         """
         Retrieve topic records for multiple topics between from and to time
-        :param topic_name: [list[string]] list of topic names, if the list is empty, return for all topics
+        :param topic_names: [list[string]] list of topic names, if the list is empty, return for all topics
         :param from_time: [datetime tz] start of the interval
         :param to_time: [datetime tz] end of the interval
         :return: topic records
