@@ -23,3 +23,8 @@ def topic(request, topic_id):
 def records_for_topic(request, topic_id):
     data = serialize('json', TopicRecordRetriever().get_records_for_topic(topic_id=topic_id))
     return HttpResponse(data, content_type='application/json')
+
+
+def records_for_topic_offset(request, topic_id, offset):
+    data = serialize('json', TopicRecordRetriever().get_records_for_topic(topic_id=topic_id, seconds_back=offset))
+    return HttpResponse(data, content_type='application/json')

@@ -46,16 +46,22 @@ class TopicRecordRetriever:
         self.topics = TopicRetriever()
 
     def get_records_for_topic(self, topic_id, from_time=datetime.now(pytz.UTC) - timedelta(hours=1),
-                              to_time=datetime.now(pytz.UTC)):
+                              to_time=datetime.now(pytz.UTC), seconds_back=0):
         """
         Retrieve topic records for single topic between from and to time.
         :param topic_name: [string] name of the topic
         :param from_time: [datetime tz] start of the interval
         :param to_time: [datetime tz] end of the interval
+        :param seconds_back: off set of starting time of the data (used instead of datetime range if set)
         :return: topic records
         """
-        return TopicRecord.objects.filter(topic=self.topics.get_topic(id=topic_id)[0], created__gte=from_time,
-                                          created__lte=to_time)
+        if seconds_back > 0:
+            return TopicRecord.objects.filter(topic=self.topics.get_topic(id=topic_id)[0],
+                                              created__range=(datetime.now(pytz.UTC) - timedelta(seconds=seconds_back),
+                                                              datetime.now(pytz.UTC)))
+        else:
+            return TopicRecord.objects.filter(topic=self.topics.get_topic(id=topic_id)[0],
+                                              created__range=(from_time, to_time))
 
     def get_records_for_topics(self, topic_names=None, from_time=datetime.now(pytz.UTC) - timedelta(hours=1),
                               to_time=datetime.now(pytz.UTC)):
