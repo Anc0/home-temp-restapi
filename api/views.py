@@ -30,7 +30,7 @@ def records_for_topic_offset(request, topic_id, offset):
     # Get data from the database
     data = TopicRecordRetriever().get_records_for_topic(topic_id=topic_id, seconds_back=offset)
     # Interpolate missing ticks
-    data = Interpolation(ticks=5).tick([{'created': x.created, 'value': x.value} for x in data])
+    data = Interpolation(ticks=72).tick([{'created': x.created, 'value': x.value} for x in data])
     # Json serialize the results
     data = json.dumps(data, indent=4, sort_keys=True, default=str)
     # Return the respose
