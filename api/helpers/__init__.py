@@ -4,7 +4,7 @@ import pytz
 
 from api.models import Topic, TopicRecord
 
-
+#TODO: move to specific files
 class TopicRetriever:
 
     def __init__(self):
