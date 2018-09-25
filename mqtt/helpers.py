@@ -25,7 +25,11 @@ class MqttClient:
     @staticmethod
     def on_message(mqttc, obj, msg):
         logger.info("Message received")
-        topic, topic_created = Topic.objects.get_or_create(name=str(msg._topic).split("'")[1])
+        topic_name = str(msg._topic).split("'")[1]
+        try:
+            topic = Topic.objects.get(name=topic_name)
+        except:
+            topic = Topic.objects.create(name=topic_name)
         logger.info(topic)
         topic_record = TopicRecord(value=float(str(msg.payload).split("'")[1]), topic=topic)
         topic_record.save()
