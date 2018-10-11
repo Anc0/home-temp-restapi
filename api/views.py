@@ -3,8 +3,9 @@ import json
 from django.core.serializers import serialize
 from django.http import HttpResponse
 
-from api.helpers import TopicRetriever, TopicRecordRetriever
 from api.helpers.interpolation import Interpolation
+from api.helpers.topic_record_retriever import TopicRecordRetriever
+from api.helpers.topic_retriever import TopicRetriever
 
 
 def index(request):

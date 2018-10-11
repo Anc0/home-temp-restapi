@@ -4,8 +4,10 @@ from django.db import models
 class Topic(models.Model):
     # Actual mqtt topic name
     name = models.CharField(max_length=255, unique=True)
-    # User friendly dispalyed name
+    # User friendly displayed name
     short_name = models.CharField(max_length=255, default="Unnamed topic")
+
+    temperature_offset = models.FloatField(default=0)
 
     last_record = models.OneToOneField('api.TopicRecord', null=True, on_delete=models.SET_NULL, related_name='last_record')
 
